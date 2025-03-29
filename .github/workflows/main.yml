@@ -1,4 +1,4 @@
-name: Linter Check
+name: Shell Script Linter
 
 on:
   push:
@@ -14,13 +14,8 @@ jobs:
       - name: Checkout Repository
         uses: actions/checkout@v4
 
-      - name: Set up Node.js
-        uses: actions/setup-node@v4
-        with:
-          node-version: '18'
+      - name: Install ShellCheck
+        run: sudo apt-get install shellcheck
 
-      - name: Install Dependencies
-        run: npm install
-
-      - name: Run ESLint
-        run: npx eslint . --ext .js,.jsx,.ts,.tsx
+      - name: Run ShellCheck
+        run: shellcheck scripts/*.sh  # Adjust path as needed
